@@ -1,0 +1,17 @@
+development:
+  clients:
+    default:
+      database: gat_devtest_development
+      hosts:
+        - localhost:27017
+
+test:
+  clients:
+    default:
+      database: gat_devtest_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
