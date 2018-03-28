@@ -2,24 +2,24 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.0'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'mongoid', '~> 5'
+gem 'apipie-rails'
 gem 'bson_ext'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'jbuilder', '~> 2.0'
+gem 'jquery-rails'
+gem 'mongoid', '~> 5'
+gem 'sass-rails', '~> 5.0'
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug'
-  gem 'spring'
-  gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'spring'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :test do

@@ -27,14 +27,6 @@ country_3 = Country.create(
   panel_provider: panel_provider_3
 )
 
-20.times do
-  Location.create(
-    name: "location-name-#{SecureRandom.hex(5)}",
-    external_id: "location-external-id-#{SecureRandom.hex(5)}",
-    secret_code: "location-secret-code-#{SecureRandom.hex(5)}"
-  )
-end
-
 LocationGroup.create(
   [
     {
@@ -59,6 +51,16 @@ LocationGroup.create(
     }
   ]
 )
+
+20.times do
+  location = Location.create(
+    name: "location-name-#{SecureRandom.hex(5)}",
+    external_id: "location-external-id-#{SecureRandom.hex(5)}",
+    secret_code: "location-secret-code-#{SecureRandom.hex(5)}",
+  )
+
+  location.location_groups << LocationGroup.all.sample
+end
 
 TargetGroup.create(
   name: "target-group-name-#{SecureRandom.hex(5)}",
