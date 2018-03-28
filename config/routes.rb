@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
 
+  apipie
+
+  resource :locations, only: [], defaults: { format: 'json' } do
+    get '/', to: 'api/v1/locations#index', defaults: { format: 'json' }
+    get '/:country_code', to: 'api/v1/locations#index', defaults: { format: 'json' }
+  end
 end

@@ -10,5 +10,6 @@ class LocationGroup
   index({location_ids: 1})
   index({country_id: 1})
   index({panel_provider_id: 1})
+  index({country_id: 1, panel_provider_id: 1})
 
 end
