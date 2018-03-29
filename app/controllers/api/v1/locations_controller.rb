@@ -4,10 +4,8 @@ class Api::V1::LocationsController < Api::BaseController
   param :country_code, String, desc: 'Country code for filtering', required: true
 
   def index
-    country = Country.find_by(country_code: params[:country_code])
-
     location_groups = LocationGroup.where(
-      country_id: country.id,
+      country_id: current_country.id,
       panel_provider_id: current_provider.id
     )
 

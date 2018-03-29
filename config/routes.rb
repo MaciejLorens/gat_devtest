@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     get '/', to: 'api/v1/target_groups#index', defaults: { format: 'json' }
     get '/:country_code', to: 'api/v1/target_groups#index', defaults: { format: 'json' }
   end
+
+  post 'evaluate_target', to: 'api/v1/evaluate_target#price'
 end
