@@ -1,0 +1,1 @@
+json.array! @root_target_groups, partial: 'target_group', as: :target_group

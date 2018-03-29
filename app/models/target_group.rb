@@ -17,4 +17,6 @@ class TargetGroup
 
   accepts_nested_attributes_for :child_target_groups
 
+  scope :roots, -> { where(parent_id: nil) }
+
 end
