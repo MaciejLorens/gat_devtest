@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::LocationsController, type: :controller do
+RSpec.describe Api::V1::TargetGroupsController, type: :controller do
   render_views
 
   let(:sample_country_code) { 'pl' }
@@ -76,26 +76,21 @@ RSpec.describe Api::V1::LocationsController, type: :controller do
                 @panel_provider_2 = create(:panel_provider)
                 @country_2 = create(:country, panel_provider: @panel_provider)
 
-                @location_1 = create(:location)
-                @location_2 = create(:location)
-                @location_3 = create(:location)
-                @location_4 = create(:location)
-                @location_5 = create(:location)
-
-                @location_group_1 = create(:location_group,
-                                           country: @country_1,
-                                           panel_provider: @panel_provider,
-                                           locations: [@location_1, @location_2])
-
-                @location_group_2 = create(:location_group,
-                                           country: @country_2,
-                                           panel_provider: @panel_provider,
-                                           locations: [@location_3])
-
-                @location_group_3 = create(:location_group,
-                                           country: @country_1,
-                                           panel_provider: @panel_provider_2,
-                                           locations: [@location_4, @location_5])
+                @target_group_1 = create(:target_group,
+                                         panel_provider: @panel_provider,
+                                         countries: [@country_1])
+                @target_group_2 = create(:target_group,
+                                         panel_provider: @panel_provider,
+                                         countries: [@country_1, @country_2])
+                @target_group_3 = create(:target_group,
+                                         panel_provider: @panel_provider_2,
+                                         countries: [@country_2])
+                @target_group_4 = create(:target_group,
+                                         panel_provider: @panel_provider_2,
+                                         countries: [@country_1])
+                @target_group_5 = create(:target_group,
+                                         panel_provider: @panel_provider_2,
+                                         countries: [@country_1, @country_2])
               end
 
               context 'for first country' do
@@ -114,6 +109,39 @@ RSpec.describe Api::V1::LocationsController, type: :controller do
                   expect(response).to have_http_status(:success)
                   expect(json.count).to eq(1)
                 end
+              end
+            end
+
+            context 'ensure tree like response' do
+              before do
+                @target_group = create(:target_group,
+                                       panel_provider: @panel_provider,
+                                       countries: [@country_1])
+
+                @target_group_1 = create(:target_group,
+                                         panel_provider: @panel_provider,
+                                         countries: [@country_1],
+                                         parent: @target_group)
+
+                @target_group_2 = create(:target_group,
+                                         panel_provider: @panel_provider,
+                                         countries: [@country_1],
+                                         parent: @target_group)
+
+                @target_group_2_1 = create(:target_group,
+                                           panel_provider: @panel_provider,
+                                           countries: [@country_1],
+                                           parent: @target_group_2)
+
+              end
+
+              it 'returns tree of target_groups' do
+                get :index, country_code: @country_1.country_code, fomat: :json
+
+                expect(response).to have_http_status(:success)
+                expect(json.count).to eq(1)
+                expect(json[0]['child_target_groups'].count).to eq(2)
+                expect(json[0]['child_target_groups'][1]['child_target_groups'].count).to eq(1)
               end
             end
           end
