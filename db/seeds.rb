@@ -5,13 +5,16 @@ LocationGroup.delete_all
 TargetGroup.delete_all
 
 panel_provider_1 = PanelProvider.create(
-  code: "panel-provider-code-#{SecureRandom.hex(5)}"
+  code: "panel-provider-code-#{SecureRandom.hex(5)}",
+  price_strategy: 'LettersCount'
 )
 panel_provider_2 = PanelProvider.create(
-  code: "panel-provider-code-#{SecureRandom.hex(5)}"
+  code: "panel-provider-code-#{SecureRandom.hex(5)}",
+  price_strategy: 'ArraysCount'
 )
 panel_provider_3 = PanelProvider.create(
-  code: "panel-provider-code-#{SecureRandom.hex(5)}"
+  code: "panel-provider-code-#{SecureRandom.hex(5)}",
+  price_strategy: 'HtmlNodesCount'
 )
 
 country_1 = Country.create(
