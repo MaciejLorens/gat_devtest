@@ -3,15 +3,16 @@ require 'open-uri'
 class PriceStrategies::ArraysCount
 
   @@count = 0
-
+  URL = 'http://openlibrary.org/search.json?q=the+lord+of+the+rings'.freeze
   COUNT_TRIGGER = 10.freeze
 
   def self.fetch_price
-    url = 'http://openlibrary.org/search.json?q=the+lord+of+the+rings'
-    response = open(url).read
+    response = open(URL).read
     json = JSON.parse(response)
 
-    count_arrays(json, COUNT_TRIGGER)
+    price = count_arrays(json, COUNT_TRIGGER)
+    @@count = 0
+    price
   end
 
   def self.count_arrays(json, count_trigger)
