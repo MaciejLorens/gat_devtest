@@ -1,3 +1,8 @@
+production:
+  clients:
+    default:
+     uri: "<%= ENV['MONGOLAB_NAVY_URI'] %>"
+
 development:
   clients:
     default:
