@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.1.10'
 gem 'rails', '4.2.0'
 
 gem 'apipie-rails'
@@ -14,11 +14,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'sanitize'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'spring'
   gem 'rspec-rails', '~> 3.7'
 end
