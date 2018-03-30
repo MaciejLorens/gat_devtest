@@ -94,6 +94,8 @@ GEM
     multi_json (1.13.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    nokogumbo (1.5.0)
+      nokogiri
     origin (2.3.1)
     rack (1.6.9)
     rack-test (0.6.3)
@@ -144,6 +146,10 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    sanitize (4.6.4)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -194,6 +200,7 @@ DEPENDENCIES
   mongoid (~> 5)
   rails (= 4.2.0)
   rspec-rails (~> 3.7)
+  sanitize
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
