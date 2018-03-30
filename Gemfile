@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.1.10'
 gem 'rails', '4.2.0'
 
 gem 'apipie-rails'
