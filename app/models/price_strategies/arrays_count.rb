@@ -2,7 +2,6 @@ require 'open-uri'
 
 class PriceStrategies::ArraysCount
 
-  @@count = 0
   URL = 'http://openlibrary.org/search.json?q=the+lord+of+the+rings'.freeze
   COUNT_TRIGGER = 10.freeze
 
@@ -10,26 +9,21 @@ class PriceStrategies::ArraysCount
     response = open(URL).read
     json = JSON.parse(response)
 
-    price = count_arrays(json, COUNT_TRIGGER)
-    @@count = 0
-    price
+    count_arrays(json)
   end
 
-  def self.count_arrays(json, count_trigger)
-    return until json.is_a? Hash
+  def self.count_arrays(json)
+    return 0 unless json.is_a?(Hash)
 
-    json.keys.each do |key|
-      if json[key].is_a? Array
-        if json[key].count >= count_trigger
-          @@count += 1
-        end
+    json.values.map do |value|
+      adding = 0
 
-        json[key].map do |json|
-          self.count_arrays(json, count_trigger)
-        end
+      if value.is_a?(Array)
+        adding += 1 if value.count >= COUNT_TRIGGER
+        adding += value.map{|v| count_arrays(v)}.sum
       end
-    end
 
-    @@count
+      adding
+    end.sum
   end
 end

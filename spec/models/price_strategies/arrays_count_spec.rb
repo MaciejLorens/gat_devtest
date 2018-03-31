@@ -76,8 +76,12 @@ RSpec.describe PriceStrategies::ArraysCount, type: :model do
     }
   end
 
+  before do
+    stub_const("PriceStrategies::ArraysCount::COUNT_TRIGGER", 4)
+  end
+
   it 'counts arrays with enouth elements' do
-    price = PriceStrategies::ArraysCount.count_arrays(json, 4)
+    price = PriceStrategies::ArraysCount.count_arrays(json)
 
     expect(price).to eq(5)
   end
